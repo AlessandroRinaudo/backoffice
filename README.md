@@ -1,6 +1,6 @@
-# CorrectionTP1
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
+# Front of the Bateau de Thibault back office 
+- Download the project https://gitea.alessandroserver.com/Bateau_de_Thibault/Front
+-  Install dependences `npm i`
 
 ## Development server
 
