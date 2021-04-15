@@ -1,5 +1,19 @@
 
-<div id="infosProduct">
+<p class="text-center">Veuillez saisir le produit dont vous voulez voir les informations</p>
+
+<div class="dropdown text-center">
+   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      Produit
+   </button>
+   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+      <li *ngFor="let item of products">
+         <button class="dropdown-item" (click)="onSelectProduct(item)">{{item.name}}</button>
+      </li>
+   </ul>
+</div>
+
+<div id="infosProduct" class="card col-sm-6">
     <h1>Page d'affichage du produit</h1>
     <ul>
         <li>
@@ -9,8 +23,20 @@
            Nom : {{product.name}}
         </li>
         <li>
-           Prix : {{product.price}}
+           Prix : {{product.price}} €
         </li>
+         <li>
+            Promotion : {{product.discount}} %
+         </li>
+         <li>
+            <input type="number" class="col-xs-2" id="newPromotion" placeholder="Nouvelle Promotion" [(ngModel)]='newPromotion'>
+         </li>
+         <li>
+            <button class="btn btn-primary" (click)="onModifyPromotion()">ModifierPromotion</button>
+         </li>
+         <li>
+            Quantité en stock : {{product.quantity_stock}}
+         </li>
     </ul>
 </div>
 

@@ -11,6 +11,7 @@ export class DetailsProductComponent implements OnInit {
 
   products;
   product;
+  newPromotion;
 
   constructor(public productsService : ProductsService) {
     this.products = [];
@@ -28,13 +29,16 @@ export class DetailsProductComponent implements OnInit {
 
   getProductId(id){
     for(let p of this.products){
-      if(p.id == 1){
+      if(p.id == id){
         this.product = p;
       }
     }
   }
-
-
-  
+  onSelectProduct(item){
+    this.getProductId(item.id)
+  }
+  onModifyPromotion(){
+    alert(this.newPromotion)
+  }
 
 }
