@@ -9,7 +9,7 @@ export class ProductsService {
   urlApi;
 
   constructor(public http: HttpClient) {
-    this.urlApi = "../assets/data/products.json";  
+    this.urlApi = "http://localhost:8000/infoproducts/";  
   }
 
   getData(){

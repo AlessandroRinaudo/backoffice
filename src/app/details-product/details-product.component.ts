@@ -41,4 +41,9 @@ export class DetailsProductComponent implements OnInit {
     alert(this.newPromotion)
   }
 
+  // getPercent ()
+
+
+  
+
 }
