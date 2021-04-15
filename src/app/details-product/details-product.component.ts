@@ -28,11 +28,13 @@ export class DetailsProductComponent implements OnInit {
 
   getProductId(id){
     for(let p of this.products){
-      if(p.id == 1){
+      if(p.id == 4){
         this.product = p;
       }
     }
   }
+
+  // getPercent ()
 
 
   
