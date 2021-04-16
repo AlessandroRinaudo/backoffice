@@ -27,15 +27,30 @@
     <li>
       Promotion : {{product.discount}} %
     </li>
+    <div class="margin-bottom-space" >
+    <ul class ="container-fluid">
+    <li class="raw">
+      <div class="raw">
+      <input type="number" class="col-xs-2 margin-bottom-space" id="newPromotion" placeholder="Ajouter Quantité"
+        [(ngModel)]='newQuantity'>
+      </div>
+        <div class="raw">
+        <button class="btn btn-success horizontal-space" (click)="addQuantity()">+</button>
+        <button class="btn btn-danger " (click)="removeQuantity()">-</button>
+      </div>
+    </li>
+  </ul>
+</div>
     <li>
       <input type="number" class="col-xs-2 margin-bottom-space" id="newPromotion" placeholder="Nouvelle Promotion"
         [(ngModel)]='newPromotion'>
     </li>
+
     <li>
       <button class="btn btn-primary" (click)="onModifyPromotion()">ModifierPromotion</button>
     </li>
     <li>
-      Quantité en stock : {{product.quantity_stock}}
+      Quantité en stock : {{product.quantityInStock}}
     </li>
   </ul>
 </div>

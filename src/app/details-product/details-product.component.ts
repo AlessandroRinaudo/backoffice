@@ -12,6 +12,7 @@ export class DetailsProductComponent implements OnInit {
   products;
   product;
   newPromotion;
+  newQuantity;
 
   constructor(public productsService : ProductsService) {
     this.products = [];
@@ -39,6 +40,14 @@ export class DetailsProductComponent implements OnInit {
   }
   onModifyPromotion(){
     alert(this.newPromotion)
+  }
+
+  addQuantity(){
+    if(this.newQuantity)
+    alert(this.newQuantity)
+  }
+  removeQuantity(){
+    alert(this.newQuantity)
   }
 
   // getPercent ()
