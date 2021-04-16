@@ -9,10 +9,13 @@ export class ProductsService {
   urlApi;
 
   constructor(public http: HttpClient) {
-    this.urlApi = "http://localhost:8000/infoproducts/";  
+    this.urlApi = "http://localhost:8000";  
   }
 
-  getData(){
-    return this.http.get(this.urlApi);
+  getProducts(){
+    return this.http.get(this.urlApi + "/infoproducts/");
+  }
+  setPromotion(id, discount) {
+    return this.http.get(this.urlApi + "/modifyDiscount/" + id + "/" + discount + "/");
   }
 }
