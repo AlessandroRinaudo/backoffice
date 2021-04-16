@@ -32,7 +32,7 @@
             <input type="number" class="col-xs-2" id="newPromotion" placeholder="Nouvelle Promotion" [(ngModel)]='newPromotion'>
          </li>
          <li>
-            <button class="btn btn-primary" (click)="onModifyPromotion()">ModifierPromotion</button>
+            <button class="btn btn-primary" (click)="onModifyPromotion(product)">ModifierPromotion</button>
          </li>
          <li>
             Quantité en stock : {{product.quantity_stock}}

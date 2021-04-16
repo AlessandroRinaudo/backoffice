@@ -18,27 +18,38 @@ export class DetailsProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productsService.getData().subscribe(res => {
-        this.products = res;
-        this.getProductId(1);
-      },
+    this.getProductsAll();
+    this.getProductId(1);
+  }
+
+  getProductsAll(){
+    this.productsService.getProducts().subscribe(res => {
+      this.products = res;
+    },
       (err) => {
         alert('failed loading json data');
       });
   }
 
-  getProductId(id){
+  getProductId(tig_id){
     for(let p of this.products){
-      if(p.id == id){
+      if (p.tig_id == tig_id){
         this.product = p;
       }
     }
   }
+
   onSelectProduct(item){
-    this.getProductId(item.id)
+    this.getProductId(item.tig_id)
   }
-  onModifyPromotion(){
-    alert(this.newPromotion)
+  onModifyPromotion(item){
+    this.productsService.setPromotion(item.tig_id, this.newPromotion).subscribe(res => {
+      this.product = res;
+    },
+      (err) => {
+        alert('failed loading json data');
+      });
+    this.getProductsAll();
   }
 
   // getPercent ()
