@@ -36,8 +36,8 @@
         [(ngModel)]='newQuantity'>
       </div>
         <div class="raw">
-        <button class="btn btn-success horizontal-space" (click)="addQuantity()">+</button>
-        <button class="btn btn-danger " (click)="removeQuantity()">-</button>
+        <button class="btn btn-success horizontal-space" (click)="addQuantity(product)">+</button>
+        <button class="btn btn-danger " (click)="removeQuantity(product)">-</button>
       </div>
     </li>
   </ul>

@@ -44,21 +44,38 @@ export class DetailsProductComponent implements OnInit {
     this.getProductId(item.tig_id)
   }
   onModifyPromotion(item){
-    this.productsService.setPromotion(item.tig_id, this.newPromotion).subscribe(res => {
-      this.product = res;
-    },
+    if (this.newPromotion){
+      this.productsService.setPromotion(item.tig_id, this.newPromotion).subscribe(res => {
+        this.product = res;
+      },
+        (err) => {
+          alert('failed loading json data');
+        });
+      this.getProductsAll();
+    }
+  }
+
+  addQuantity(item){
+    if(this.newQuantity){
+      this.productsService.addQuantity(item.tig_id, this.newQuantity).subscribe(res => {
+        this.product = res;
+      },
       (err) => {
         alert('failed loading json data');
       });
-    this.getProductsAll();
+      this.getProductsAll();
+    }
   }
-
-  addQuantity(){
-    if(this.newQuantity)
-    alert(this.newQuantity)
-  }
-  removeQuantity(){
-    alert(this.newQuantity)
+  removeQuantity(item){
+    if (this.newQuantity){
+      this.productsService.removeQuantity(item.tig_id, this.newQuantity).subscribe(res => {
+        this.product = res;
+      },
+        (err) => {
+          alert('failed loading json data');
+        });
+      this.getProductsAll();
+    }
   }
 
   // getPercent ()

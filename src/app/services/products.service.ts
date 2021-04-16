@@ -18,4 +18,10 @@ export class ProductsService {
   setPromotion(id, discount) {
     return this.http.get(this.urlApi + "/modifyDiscount/" + id + "/" + discount + "/");
   }
+  addQuantity(id, quantity){
+    return this.http.get(this.urlApi + "/incrementStock/" + id + "/" + quantity + "/");
+  }
+  removeQuantity(id, quantity) {
+    return this.http.get(this.urlApi + "/decrementStock/" + id + "/" + quantity + "/");
+  }
 }
