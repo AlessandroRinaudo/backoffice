@@ -7,13 +7,15 @@ import { DetailsProductComponent } from './details-product/details-product.compo
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ManageStockComponent } from './manage-stock/manage-stock.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DetailsProductComponent,
-    HomeComponent
+    HomeComponent,
+    ManageStockComponent
   ],
   imports: [
     BrowserModule,
