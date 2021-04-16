@@ -11,3 +11,15 @@ hr.solid {
 .horizontal-space {
   margin-right: 10px;
 }
+
+th  {
+  font-size: 14px !important;
+}
+
+.small-input {
+  width:100% !important
+}
+
+td {
+  width: 80%;
+}

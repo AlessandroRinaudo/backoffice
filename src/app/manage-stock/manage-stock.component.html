@@ -1,1 +1,46 @@
-<p>manage-stock works!</p>
+<h1 class="text-center" style ="margin-bottom:90px">Modification simultanée de produits</h1>
+
+<div class="row justify-content-md-center container-fluid">
+  <div class="row">
+    <!-- Boucle for -->
+  <div class="col-sm-6">
+    <h5 class="card-title" style="text-align:center">Nom catégorie</h5>
+    <div class="card">
+      <div class="card-body justify-content-md-center">
+        <table class="table container-fluid justify-content-md-center">
+          <thead class="table container-fluid justify-content-md-center">
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Promotion</th>
+              <th scope="col">Quantité</th>
+              <th scope="col">Vendus</th>
+              <th scope="col">Commentaires</th>
+              <th scope="col">Ajout <br> Stock</th>
+              <th scope="col">Ajout <br> promo</th>
+            </tr>
+          </thead>
+          <tbody class="table container-fluid justify-content-md-center">
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <input type="number" class="small-input"  id="newPromotion" placeholder="..." [(ngModel)]='newPromotion'>
+              </td>
+              <td>
+                <input type="number" class="small-input" id="newPromotion" placeholder="%" [(ngModel)]='newPromotion'>
+              </td>
+             
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- fin boucle for -->
+</div>
+<a class="btn btn-primary" style="width:10%; margin-top:30px">Modifier stock</a>
