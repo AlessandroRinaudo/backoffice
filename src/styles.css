@@ -23,3 +23,19 @@ th  {
 td {
   width: 80%;
 }
+
+.anavlink {
+  background-color: #fff;
+  color:#0d6efd !important;
+  border-radius: 10px;
+}
+
+.bg-dark {
+  background-color: #0d6efd!important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #fff;
+  font-size:18px;
+  padding:9px;
+}
