@@ -16,12 +16,15 @@ export class DetailsProductComponent implements OnInit {
 
   constructor(public productsService : ProductsService) {
     this.products = [];
+    this.product={name:'Selectioner un produit'}
   }
 
   ngOnInit() {
     this.getProductsAll();
     this.getProductId(1);
+    this.onSelectProductId(12)
   }
+
 
   getProductsAll(){
     this.productsService.getProducts().subscribe(res => {
@@ -42,6 +45,9 @@ export class DetailsProductComponent implements OnInit {
 
   onSelectProduct(item){
     this.getProductId(item.tig_id)
+  }
+  onSelectProductId(tigId){
+    this.getProductId(tigId)
   }
   onModifyPromotion(item){
     if (this.newPromotion){

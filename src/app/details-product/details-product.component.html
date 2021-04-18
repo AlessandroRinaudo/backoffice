@@ -1,10 +1,9 @@
 <p class="text-center">Veuillez saisir le produit dont vous voulez voir les informations</p>
 
-
 <div class="dropdown text-center margin-bottom-space" >
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+  <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
     aria-expanded="false">
-    Produit
+    {{product.name}}
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     <li *ngFor="let item of products">
@@ -16,9 +15,6 @@
 <div id="infosProduct" class="card col-sm-6 d-flex p-2 container-fluid">
   <h1>Page d'affichage du produit</h1>
   <ul>
-    <li>
-      Id : {{product.id}}
-    </li>
     <li>
       Nom : {{product.name}}
     </li>

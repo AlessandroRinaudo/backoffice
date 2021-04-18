@@ -45,3 +45,10 @@ td {
 .navbar-toggler{
   padding: 12px ;
 }
+
+.btn-light{
+  border-color: black;
+}
+.btn-light:focus{
+  border-color: black;
+}
