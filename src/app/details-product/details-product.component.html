@@ -24,6 +24,9 @@
     <li>
       Promotion : {{product.discount}} %
     </li>
+    <li>
+      Prix en promotion : {{salePrice}} €
+    </li>
     <div class="margin-bottom-space" >
     <ul class ="container-fluid">
     <li class="raw">
@@ -44,7 +47,7 @@
     </li>
 
     <li>
-      <button class="btn btn-primary" (click)="onModifyPromotion(product)">ModifierPromotion</button>
+      <button class="btn btn-primary" (click)="onModifyPromotion(product);addSale(product)">ModifierPromotion</button>
     </li>
     <li>
       Quantité en stock : {{product.quantityInStock}}

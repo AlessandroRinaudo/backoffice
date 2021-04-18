@@ -13,10 +13,12 @@ export class DetailsProductComponent implements OnInit {
   product;
   newPromotion;
   newQuantity;
+  salePrice;
 
-  constructor(public productsService : ProductsService) {
+  constructor(public productsService: ProductsService) {
     this.products = [];
-    this.product={name:'Selectioner un produit'}
+    this.product = { name: 'Selectioner un produit', price: 0, discount: 0, quantityInStock: 0 }
+    this.salePrice = 0
   }
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class DetailsProductComponent implements OnInit {
   }
 
 
-  getProductsAll(){
+  getProductsAll() {
     this.productsService.getProducts().subscribe(res => {
       this.products = res;
     },
@@ -35,22 +37,27 @@ export class DetailsProductComponent implements OnInit {
       });
   }
 
-  getProductId(tig_id){
-    for(let p of this.products){
-      if (p.tig_id == tig_id){
+  getProductId(tig_id) {
+    for (let p of this.products) {
+      if (p.tig_id == tig_id) {
         this.product = p;
       }
     }
   }
 
-  onSelectProduct(item){
-    this.getProductId(item.tig_id)
+  addSale(item) {
+    this.salePrice = Math.round(((item.price / 100) * (100 - item.discount)) * 100) / 100
   }
-  onSelectProductId(tigId){
+
+  onSelectProduct(item) {
+    this.getProductId(item.tig_id)
+    this.addSale(item)
+  }
+  onSelectProductId(tigId) {
     this.getProductId(tigId)
   }
-  onModifyPromotion(item){
-    if (this.newPromotion){
+  onModifyPromotion(item) {
+    if (this.newPromotion) {
       this.productsService.setPromotion(item.tig_id, this.newPromotion).subscribe(res => {
         this.product = res;
       },
@@ -61,19 +68,19 @@ export class DetailsProductComponent implements OnInit {
     }
   }
 
-  addQuantity(item){
-    if(this.newQuantity){
+  addQuantity(item) {
+    if (this.newQuantity) {
       this.productsService.addQuantity(item.tig_id, this.newQuantity).subscribe(res => {
         this.product = res;
       },
-      (err) => {
-        alert('failed loading json data');
-      });
+        (err) => {
+          alert('failed loading json data');
+        });
       this.getProductsAll();
     }
   }
-  removeQuantity(item){
-    if (this.newQuantity){
+  removeQuantity(item) {
+    if (this.newQuantity) {
       this.productsService.removeQuantity(item.tig_id, this.newQuantity).subscribe(res => {
         this.product = res;
       },
@@ -87,6 +94,6 @@ export class DetailsProductComponent implements OnInit {
   // getPercent ()
 
 
-  
+
 
 }
