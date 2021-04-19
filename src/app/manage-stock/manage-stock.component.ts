@@ -12,6 +12,7 @@ export class ManageStockComponent implements OnInit {
   productsCoquillages;
   newQuantity;
   newPromotion;
+  prixTransaction;
   categories = [
     { "id": 1, "name": "poissons", "products": null  },
     { "id": 2, "name": "crustaces", "products": null },
@@ -23,6 +24,7 @@ export class ManageStockComponent implements OnInit {
   ngOnInit() {
     this.newQuantity = [];
     this.newPromotion = [];
+    this.prixTransaction = [];
     this.getProductsAll();
   }
 
@@ -76,5 +78,20 @@ export class ManageStockComponent implements OnInit {
     this.addQuantity();
     this.onModifyPromotion();
     this.getProductsAll();
+  }
+
+  addTransaction(){
+    let trans = {
+      "price": 2.0,
+      "quantity": 10,
+      "tig_id": 2,
+      "type": "Vente"
+    }
+    this.productsService.postTransaction(trans).subscribe(res => {
+      res;
+    },
+    (err) => {
+      alert(err + 'failed loading json data');
+    });
   }
 }
