@@ -27,4 +27,7 @@ export class ProductsService {
   getProductCategories(category){
     return this.http.get(this.urlApi + "/" + category + "/");
   }
+  postTransaction(trans) {
+    return this.http.post(this.urlApi + "/transactions/", trans);
+  }
 }
