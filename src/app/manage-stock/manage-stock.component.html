@@ -4,7 +4,7 @@
   <div class="row">
     <!-- Boucle for -->
   <div class="col-sm-6">
-    <h5 class="card-title" style="text-align:center">Nom catégorie</h5>
+    <h5 class="card-title" style="text-align:center">Poisson</h5>
     <div class="card">
       <div class="card-body justify-content-md-center">
         <table class="table container-fluid justify-content-md-center">
@@ -21,18 +21,18 @@
             </tr>
           </thead>
           <tbody class="table container-fluid justify-content-md-center">
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let product of productsPoisson">
+              <td>{{product.name}}</td>
+              <td>{{product.price}}</td>
+              <td>{{product.discount}}</td>
+              <td>{{product.quantityInStock}}</td>
+              <td>{{product.nombre_produit_vendu}}</td>
+              <td>{{product.comments}}</td>
               <td>
-                <input type="number" class="small-input"  id="newPromotion" placeholder="..." [(ngModel)]='newPromotion'>
+                <input type="number" class="small-input"  id="newQuantity" placeholder="..." [(ngModel)]='newQuantity[product.tig_id]'>
               </td>
               <td>
-                <input type="number" class="small-input" id="newPromotion" placeholder="%" [(ngModel)]='newPromotion'>
+                <input type="number" class="small-input" id="newPromotion" placeholder="%" [(ngModel)]='newPromotion[product.tig_id]'>
               </td>
              
             </tr>
@@ -43,4 +43,4 @@
   </div>
   <!-- fin boucle for -->
 </div>
-<a class="btn btn-primary" style="width:10%; margin-top:30px">Modifier stock</a>
+<a class="btn btn-primary" style="width:10%; margin-top:30px" (click)="modifyStock()">Modifier stock</a>

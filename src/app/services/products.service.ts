@@ -24,4 +24,7 @@ export class ProductsService {
   removeQuantity(id, quantity) {
     return this.http.get(this.urlApi + "/decrementStock/" + id + "/" + quantity + "/");
   }
+  getProductCategories(category){
+    return this.http.get(this.urlApi + "/" + category + "/");
+  }
 }
