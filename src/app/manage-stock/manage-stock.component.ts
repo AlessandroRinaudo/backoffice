@@ -8,24 +8,36 @@ import { ProductsService } from '../services/products.service';
 })
 export class ManageStockComponent implements OnInit {
   productsPoisson;
+  productsCrustaces;
+  productsCoquillages;
   newQuantity;
   newPromotion;
+  categories = [
+    { "id": 1, "name": "poissons", "products": null  },
+    { "id": 2, "name": "crustaces", "products": null },
+    { "id": 3, "name": "coquillages", "products": null },
+  ];
 
   constructor(public productsService: ProductsService) { }
 
   ngOnInit() {
     this.newQuantity = [];
     this.newPromotion = [];
-    this.getProductsPoisson();
+    this.getProductsAll();
   }
 
   getProductsAll() {
-    this.getProductsPoisson();
+    for (let i = 0; i < this.categories.length; i++){
+      this.getProductsCategory(this.categories[i].name);
+      console.log(this.categories[i].products)
+    }
   }
 
-  getProductsPoisson() {
-    this.productsService.getProductCategories("poissons").subscribe(res => {
-      this.productsPoisson = res;
+  getProductsCategory(category) {
+    this.productsService.getProductCategories(category).subscribe(res => {
+      for (let i = 0; i < this.categories.length; i++)
+        if (this.categories[i].name == category)
+          this.categories[i].products = res;
     },
       (err) => {
         alert('failed loading json data');
@@ -57,7 +69,7 @@ export class ManageStockComponent implements OnInit {
           });
       }
     }
-    console.log(this.newQuantity)
+    console.log(this.newQuantity);
   }
 
   modifyStock(){
