@@ -19,7 +19,7 @@ th  {
 }
 
 .small-input {
-  width:100% !important
+  width:69px !important
 }
 
 td {
@@ -39,7 +39,7 @@ td {
 .navbar-dark .navbar-nav .nav-link {
   color: #fff;
   font-size:18px;
-  padding: 15px;
+  padding: 16px;
 }
 
 .navbar-toggler{

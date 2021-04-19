@@ -36,8 +36,9 @@ export class ManageStockComponent implements OnInit {
   getProductsCategory(category) {
     this.productsService.getProductCategories(category).subscribe(res => {
       for (let i = 0; i < this.categories.length; i++)
-        if (this.categories[i].name == category)
+        if (this.categories[i].name == category) {
           this.categories[i].products = res;
+        }
     },
       (err) => {
         alert('failed loading json data');
@@ -62,6 +63,20 @@ export class ManageStockComponent implements OnInit {
     for (let tig_id = 0; tig_id < this.newQuantity.length; tig_id++) {
       if (this.newQuantity[tig_id]) {
         this.productsService.addQuantity(tig_id, this.newQuantity[tig_id]).subscribe(res => {
+          res;
+        },
+          (err) => {
+            alert(err + 'failed loading json data');
+          });
+      }
+    }
+    console.log(this.newQuantity);
+  }
+
+  removeQuantity() {
+    for (let tig_id = 0; tig_id < this.newQuantity.length; tig_id++) {
+      if (this.newQuantity[tig_id]) {
+        this.productsService.removeQuantity(tig_id, this.newQuantity[tig_id]).subscribe(res => {
           res;
         },
           (err) => {
