@@ -14,17 +14,19 @@ export class DetailsProductComponent implements OnInit {
   newPromotion;
   newQuantity;
   salePrice;
+  copyDiscount;
 
   constructor(public productsService: ProductsService) {
     this.products = [];
-    this.product = { name: 'Selectioner un produit', price: 0, discount: 0, quantityInStock: 0 }
-    this.salePrice = 0
+    this.product = { name: 'Selectioner un produit', price: 0, discount: 0, quantityInStock: 0 };
+    this.salePrice = 0;
+    this.copyDiscount=0;
   }
 
   ngOnInit() {
     this.getProductsAll();
     this.getProductId(1);
-    this.onSelectProductId(12)
+    this.onSelectProductId(12);
   }
 
 
@@ -46,11 +48,13 @@ export class DetailsProductComponent implements OnInit {
   }
 
   addSale(item) {
-    this.salePrice = Math.round(((item.price / 100) * (100 - item.discount)) * 100) / 100
+    // this.copyDiscount = item.discount
+    this.salePrice = Math.round(((item.price / 100) * (100 - this.copyDiscount)) * 100) / 100
   }
 
   onSelectProduct(item) {
     this.getProductId(item.tig_id)
+    this.copyDiscount = item.discount
     this.addSale(item)
   }
   onSelectProductId(tigId) {
@@ -58,6 +62,7 @@ export class DetailsProductComponent implements OnInit {
   }
   onModifyPromotion(item) {
     if (this.newPromotion) {
+      this.copyDiscount= this.newPromotion
       this.productsService.setPromotion(item.tig_id, this.newPromotion).subscribe(res => {
         this.product = res;
       },
