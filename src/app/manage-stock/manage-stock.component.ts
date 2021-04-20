@@ -18,7 +18,9 @@ export class ManageStockComponent implements OnInit {
     { "id": 2, "name": "crustaces", "products": null },
     { "id": 3, "name": "coquillages", "products": null },
   ];
-  poisson = false;
+  poissons:boolean = true;
+  crustaces: boolean=true;
+  coquillages: boolean=true;
   
 
   constructor(public productsService: ProductsService) { }
@@ -123,6 +125,21 @@ export class ManageStockComponent implements OnInit {
       (err) => {
         alert(err + 'failed loading json data');
       });
+    }
+  }
+
+  onclick(item){
+    if(item == "poissons"){
+      this.poissons = !this.poissons;
+
+    }
+    if(item == "coquillages"){
+      this.coquillages = !this.coquillages;
+
+    }
+    if(item == "crustaces"){
+      this.crustaces = !this.crustaces;
+
     }
   }
 }

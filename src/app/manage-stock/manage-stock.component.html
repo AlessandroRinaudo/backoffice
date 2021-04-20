@@ -4,10 +4,10 @@
   <div class="row">
     <!-- Boucle for -->
     <div *ngFor="let category of categories" class="col-sm-6">
-      <button name="List{{category.name}}">
+      <button name="List{{category.name}}" (click)="onclick(category.name)" type="button">
         <h5 class="card-title" style="text-align:center">{{category.name}}</h5>
       </button>
-      <div class="card">
+      <div *ngIf="'category.name'" class="card" >
         <div class="card-body justify-content-md-center">
           <table class="table container-fluid justify-content-md-center">
             <thead class="table container-fluid justify-content-md-center">
