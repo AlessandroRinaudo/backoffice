@@ -18,6 +18,8 @@ export class ManageStockComponent implements OnInit {
     { "id": 2, "name": "crustaces", "products": null },
     { "id": 3, "name": "coquillages", "products": null },
   ];
+  poisson = false;
+  
 
   constructor(public productsService: ProductsService) { }
 
