@@ -30,4 +30,7 @@ export class ProductsService {
   postTransaction(trans) {
     return this.http.post(this.urlApi + "/transactions/", trans);
   }
+  getTransaction() {
+    return this.http.get(this.urlApi + "/transactions/");
+  }
 }

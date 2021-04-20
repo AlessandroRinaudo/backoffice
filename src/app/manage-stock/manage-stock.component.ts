@@ -21,6 +21,7 @@ export class ManageStockComponent implements OnInit {
   poissons:boolean = true;
   crustaces: boolean=true;
   coquillages: boolean=true;
+  visibility = [];
   
 
   constructor(public productsService: ProductsService) { }
@@ -130,15 +131,18 @@ export class ManageStockComponent implements OnInit {
 
   onclick(item){
     if(item == "poissons"){
-      this.poissons = !this.poissons;
+      //this.poissons = !this.poissons;
+      this.visibility["poissons"] = !this.visibility["poissons"];
 
     }
     if(item == "coquillages"){
-      this.coquillages = !this.coquillages;
+      //this.coquillages = !this.coquillages;
+      this.visibility["coquillages"] = !this.visibility["coquillages"];
 
     }
     if(item == "crustaces"){
-      this.crustaces = !this.crustaces;
+      //this.crustaces = !this.crustaces;
+      this.visibility["crustaces"] = !this.visibility["crustaces"];
 
     }
   }
