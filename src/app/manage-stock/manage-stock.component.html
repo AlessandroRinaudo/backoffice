@@ -17,6 +17,7 @@
                 <th scope="col">Vendus</th>
                 <th scope="col">Commentaires</th>
                 <th scope="col">Ajout <br> Stock</th>
+                <th scope="col">Prix <br> transac</th>
                 <th scope="col">Ajout <br> promo</th>
               </tr>
             </thead>
@@ -31,6 +32,10 @@
                 <td>
                   <input type="number" class="small-input" id="newQuantity" placeholder="..."
                     [(ngModel)]='newQuantity[product.tig_id]'>
+                </td>
+                <td>
+                  <input type="number" class="small-input" id="prixTransaction" placeholder="€"
+                    [(ngModel)]='prixTransaction[product.tig_id]'>
                 </td>
                 <td>
                   <input type="number" class="small-input" id="newPromotion" placeholder="%"
