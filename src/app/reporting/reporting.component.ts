@@ -55,12 +55,14 @@ export class ReportingComponent implements OnInit {
 
   ngOnInit() {
     this.getTransaction();
+    this.getMarge()
   }
 
   getTransaction() {
     this.productsService.getTransaction().subscribe(res => {
       this.transactions = res;
       this.getchiffresAffaire("année")
+      this.getMarge()
     },
       (err) => {
         alert('failed loading json data');
@@ -70,7 +72,8 @@ export class ReportingComponent implements OnInit {
   getTransactionCategory(idCategory) {
     this.productsService.getTransactionCategory(idCategory).subscribe(res => {
       this.transactions = res;
-      this.getchiffresAffaire("année")
+      this.getchiffresAffaire("année");
+      this.getMarge()
     },
       (err) => {
         alert('failed loading json data');
@@ -292,11 +295,7 @@ export class ReportingComponent implements OnInit {
   }
 
   getMarge() {
-    this.labels = [];
-    this.dataCA = [];
-    this.dataCout = [];
-    this.dataMarge = [];
-    this.chiffreAffaires = 0
+    this.marge = 0
     let today = new Date();
     let todayYear = today.getFullYear();
     for (let i = 0; i < this.transactions.length; i++) {
@@ -312,6 +311,11 @@ export class ReportingComponent implements OnInit {
         }
       }
     }
+    this.getImpot();
+  }
+
+  getImpot(){
+    this.impot = (this.marge * 30)/100
   }
 
   initChart() {
