@@ -33,4 +33,8 @@ export class ProductsService {
   getTransaction() {
     return this.http.get(this.urlApi + "/transactions/");
   }
+  getTransactionCategory(category) {
+    console.log(category)
+    return this.http.get(this.urlApi + "/transactions/" + category + "/");
+  }
 }

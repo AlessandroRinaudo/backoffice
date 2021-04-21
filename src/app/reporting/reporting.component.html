@@ -1,3 +1,25 @@
 <p>reporting works!</p>
-
+<div class="dropdown text-center margin-bottom-space">
+    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Selectionner la category
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li *ngFor="let item of categories">
+            <button class="dropdown-item" (click)="getTransactionCategory(item.id)">{{item.name}}</button>
+        </li>
+    </ul>
+</div>
+<div class="dropdown text-center margin-bottom-space" >
+<button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Selectionner le type de filtre
+</button>
+<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li *ngFor="let item of filtrage">
+        <button class="dropdown-item" (click)="getchiffresAffaire(item.name)">{{item.name}}</button>
+    </li>
+</ul>
+</div>
+<p>{{chiffreAffaires}}</p>
 <canvas id="myChart">{{ chart }}</canvas>
