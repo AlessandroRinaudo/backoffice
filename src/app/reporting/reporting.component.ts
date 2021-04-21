@@ -12,21 +12,39 @@ import { DatePipe } from '@angular/common';
 export class ReportingComponent implements OnInit {
   chart = null;
   labels = [];
-  d = [];
+  dataCA = [];
+  dataCout = [];
+  dataMarge = [];
   data = {
     labels: this.labels,
     datasets: [{
       label: 'Chiffres d\'affaires',
-      data: this.d,
+      data: this.dataCA,
       fill: false,
       borderColor: 'rgb(75, 192, 192)',
       tension: 0.1
-    }]
+    },
+      {
+        label: 'Cout',
+        data: this.dataCout,
+        fill: false,
+        borderColor: 'rgb(192, 192, 192)',
+        tension: 0.1
+      },
+    {
+        label: 'Marge',
+      data: this.dataMarge,
+        fill: false,
+        borderColor: 'rgb(192, 192, 192)',
+        tension: 0.1
+      }]
   };
 
   transactions = null;
   filtrage = [{ name: 'all' }, { name: 'année' }, { name: 'mois' }, { name: 'semaine' }, { name: 'jour' }]
   chiffreAffaires = 0;
+  marge = 0;
+  impot = 0;
   categories = [
     { "id": 0, "name": "poissons", "products": null },
     { "id": 2, "name": "crustaces", "products": null },
@@ -79,87 +97,221 @@ export class ReportingComponent implements OnInit {
   }
 
   getchiffresAffaire(filtrage){
+    this.labels = [];
+    this.dataCA = [];
+    this.dataCout = [];
+    this.dataMarge = [];
     this.chiffreAffaires = 0
     let today = new Date();
-    let dateToday;
-    if (filtrage == "année"){
-      dateToday = today.toLocaleString('default', { month: 'long' })
-    }
-    else if (filtrage == "mois") {
-      dateToday = today.getDate()
-    }
-    else if (filtrage == "semaine") {
-      dateToday = today.toLocaleString('default', { weekday: 'long' })
-    }
-    else if (filtrage == "jour") {
-      dateToday = today.getHours()
-    } else {
-      dateToday = today.getFullYear()
-    }
-    for (let i = 0; i < this.transactions.length; i++) {
-      let date = new Date(this.transactions[i].created)
-      let dateTransac;
-      if (filtrage == "année") {
-        dateTransac = date.toLocaleString('default', { month: 'long' })
-      }
-      else if (filtrage == "mois") {
-        dateTransac = date.getDate()
-      }
-      else if (filtrage == "semaine") {
-        dateTransac = date.toLocaleString('default', { weekday: 'long' })
-      }
-      else if (filtrage == "jour") {
-        dateTransac = date.getHours()
-      } else {
-        dateTransac = date.getFullYear()
-      }
-      if (this.transactions[i].type == "Sale") {
-        if (dateTransac == dateToday) {
-          this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
-        }
-      }
-    }
-    this.initData(filtrage);
-  }
-
-  initData(filtrage){
-    this.labels = [];
-    this.d = [];
+    let todayYear = today.getFullYear();
+    let todayMonth = today.toLocaleString('default', { month: 'long' })
+    let todayMonthDay = today.getDate();
     for (let i = 0; i < this.transactions.length; i++) {
       let dateExist = false
       let date = new Date(this.transactions[i].created)
-      let dateTransac;
-      if (filtrage == "année") {
-        dateTransac = date.toLocaleString('default', { month: 'long' })
-      }
-      else if (filtrage == "mois") {
-        dateTransac = date.getDate()
-      }
-      else if (filtrage == "semaine") {
-        dateTransac = date.toLocaleString('default', { weekday: 'long' })
-      }
-      else if (filtrage == "jour") {
-        dateTransac = date.getHours()
-      } else {
-        dateTransac = date.getFullYear()
-      }
-      console.log(dateTransac)
-      if (this.transactions[i].type == "Sale"){
-        for (let j = 0; j < this.labels.length; j++) {
-          if (this.labels[j] == dateTransac){
-            this.d[j] = this.d[j] + this.transactions[i].price
-            dateExist = true;
+      let transacYear = date.getFullYear();
+      let transacMonth = date.toLocaleString('default', { month: 'long' })
+      let transacMonthDay = date.getDate();
+      let transacWeekday = date.toLocaleString('default', { weekday: 'long' })
+      let transacHour = date.getHours()
+      if (this.transactions[i].type == "Sale") {
+        if (filtrage == "année") {
+          if (transacYear == todayYear) {
+            this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacMonth) {
+                this.dataCA[j] = this.dataCA[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] + this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCout[this.dataCout.length] = 0
+              this.dataCA[this.dataCA.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacMonth;
+              this.dataMarge[this.dataMarge.length] = this.transactions[i].price
+            }
           }
         }
-        if (dateExist == false) {
-          this.d[this.d.length] = this.transactions[i].price;
-          this.labels[this.labels.length] = dateTransac;
+        else if (filtrage == "mois") {
+          if (transacYear == todayYear && transacMonth == todayMonth) {
+            this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacMonthDay) {
+                this.dataCA[j] = this.dataCA[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] + this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCout[this.dataCout.length] = 0
+              this.dataCA[this.dataCA.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacMonthDay;
+              this.dataMarge[this.dataMarge.length] = this.transactions[i].price
+            }
+          }
+        }
+        else if (filtrage == "semaine") {
+          if (transacYear == todayYear && transacMonth == todayMonth) {
+            this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacWeekday) {
+                this.dataCA[j] = this.dataCA[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] + this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCout[this.dataCout.length] = 0
+              this.dataCA[this.dataCA.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacWeekday;
+              this.dataMarge[this.dataMarge.length] = this.transactions[i].price
+            }
+          }
+        }
+        else if (filtrage == "jour") {
+          if (transacYear == todayYear && transacMonth == todayMonth && transacMonthDay == todayMonthDay) {
+            this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacHour) {
+                this.dataCA[j] = this.dataCA[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] + this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCout[this.dataCout.length] = 0
+              this.dataCA[this.dataCA.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacHour;
+              this.dataMarge[this.dataMarge.length] = this.transactions[i].price
+            }
+          }
+        } else {
+          this.chiffreAffaires = this.chiffreAffaires + this.transactions[i].price
+          for (let j = 0; j < this.labels.length; j++) {
+            if (this.labels[j] == transacYear) {
+              this.dataCA[j] = this.dataCA[j] + this.transactions[i].price
+              this.dataMarge[j] = this.dataMarge[j] + this.transactions[i].price
+              dateExist = true;
+            }
+          }
+          if (dateExist == false) {
+            this.dataCout[this.dataCout.length] = 0
+            this.dataCA[this.dataCA.length] = this.transactions[i].price;
+            this.labels[this.labels.length] = transacYear;
+            this.dataMarge[this.dataMarge.length] = this.transactions[i].price
+          }
+        }
+      }
+      else if (this.transactions[i].type == "Purchase"){
+        if (filtrage == "année") {
+          if (transacYear == todayYear) {
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacMonth) {
+                this.dataCout[j] = this.dataCout[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] - this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCA[this.dataCA.length] = 0
+              this.dataCout[this.dataCout.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacMonth;
+              this.dataMarge[this.dataMarge.length] = (0 - this.transactions[i].price)
+            }
+          }
+        }
+        else if (filtrage == "mois") {
+          if (transacYear == todayYear && transacMonth == todayMonth) {
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacMonthDay) {
+                this.dataCout[j] = this.dataCout[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] - this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCA[this.dataCA.length] = 0
+              this.dataCout[this.dataCout.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacMonthDay;
+              this.dataMarge[this.dataMarge.length] = (0 - this.transactions[i].price)
+            }
+          }
+        }
+        else if (filtrage == "semaine") {
+          if (transacYear == todayYear && transacMonth == todayMonth) {
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacWeekday) {
+                this.dataCout[j] = this.dataCout[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] - this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCA[this.dataCA.length] = 0
+              this.dataCout[this.dataCout.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacWeekday;
+              this.dataMarge[this.dataMarge.length] = (0 - this.transactions[i].price)
+            }
+          }
+        }
+        else if (filtrage == "jour") {
+          if (transacYear == todayYear && transacMonth == todayMonth && transacMonthDay == todayMonthDay) {
+            for (let j = 0; j < this.labels.length; j++) {
+              if (this.labels[j] == transacHour) {
+                this.dataCout[j] = this.dataCout[j] + this.transactions[i].price
+                this.dataMarge[j] = this.dataMarge[j] - this.transactions[i].price
+                dateExist = true;
+              }
+            }
+            if (dateExist == false) {
+              this.dataCA[this.dataCA.length] = 0
+              this.dataCout[this.dataCout.length] = this.transactions[i].price;
+              this.labels[this.labels.length] = transacHour;
+              this.dataMarge[this.dataMarge.length] = (0 - this.transactions[i].price)
+            }
+          }
+        } else {
+          for (let j = 0; j < this.labels.length; j++) {
+            if (this.labels[j] == transacYear) {
+              this.dataCout[j] = this.dataCout[j] + this.transactions[i].price
+              this.dataMarge[j] = this.dataMarge[j] - this.transactions[i].price
+              dateExist = true;
+            }
+          }
+          if (dateExist == false) {
+            this.dataCA[this.dataCA.length] = 0
+            this.dataCout[this.dataCout.length] = this.transactions[i].price;
+            this.labels[this.labels.length] = transacYear;
+            this.dataMarge[this.dataMarge.length] = (0 - this.transactions[i].price)
+          }
         }
       }
     }
-    console.log(this.d);
-    console.log(this.labels);
     this.initChart();
+  }
+
+  getMarge() {
+    this.labels = [];
+    this.dataCA = [];
+    this.dataCout = [];
+    this.dataMarge = [];
+    this.chiffreAffaires = 0
+    let today = new Date();
+    let todayYear = today.getFullYear();
+    for (let i = 0; i < this.transactions.length; i++) {
+      let dateExist = false
+      let date = new Date(this.transactions[i].created)
+      let transacYear = date.getFullYear();
+      if (transacYear == todayYear){
+        if (this.transactions[i].type == "Sale") {
+          this.marge = this.marge + this.transactions[i].price
+        }
+        else if (this.transactions[i].type == "Purchase") {
+          this.marge = this.marge - this.transactions[i].price
+        }
+      }
+    }
   }
 
   initChart() {
@@ -175,7 +327,12 @@ export class ReportingComponent implements OnInit {
     });
     this.chart.data.labels = this.labels
     this.chart.data.datasets.forEach((dataset) => {
-      dataset.data = this.d;
+      if (dataset.label == 'Cout')
+        dataset.data = this.dataCout;
+      else if (dataset.label == 'Marge')
+        dataset.data = this.dataMarge
+      else
+        dataset.data = this.dataCA;
     });
     this.chart.update();
   }
