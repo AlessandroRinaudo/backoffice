@@ -58,3 +58,14 @@ td {
 .btn-light:focus{
   border-color: black;
 }
+
+.btn-secondary {
+  color: #fff;
+  background-color: #5d5c5c !important;
+  border-color: black;
+}
+.btn-secondary:hover {
+  color: #fff;
+  background-color: #87878a  !important;
+  border-color: #565e64;
+}
