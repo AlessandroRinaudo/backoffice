@@ -12,7 +12,9 @@ import { ManageStockComponent } from './manage-stock/manage-stock.component';
 import { ReportingComponent } from './reporting/reporting.component';
 import { LoginComponent } from './login/login.component';
 import { NavComponent } from './nav/nav.component';
-
+import { CookieService } from 'ngx-cookie-service';
+import { NotLoggedGuard } from './guards/not-logged.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -32,7 +34,7 @@ import { NavComponent } from './nav/nav.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, CookieService, AuthGuard, NotLoggedGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

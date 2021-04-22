@@ -5,16 +5,18 @@ import { DetailsProductComponent } from './details-product/details-product.compo
 import { HomeComponent } from './home/home.component';
 import { ReportingComponent } from './reporting/reporting.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { NotLoggedGuard } from './guards/not-logged.guard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'detailsProduit', component: DetailsProductComponent},
-  { path: 'manageStock', component: ManageStockComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'reporting', component: ReportingComponent },
+  { path: 'detailsProduit', component: DetailsProductComponent, canActivate: [AuthGuard] },
+  { path: 'manageStock', component: ManageStockComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'reporting', component: ReportingComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  // { path: 'home', component: HomeComponent }
+  // { path: 'home', component: HomeComponent, canLoad: [AuthGuard] }
 ];
 
 @NgModule({
