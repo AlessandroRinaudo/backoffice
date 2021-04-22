@@ -10,7 +10,7 @@ import { NotLoggedGuard } from './guards/not-logged.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'detailsProduit', component: DetailsProductComponent, canActivate: [AuthGuard] },
   { path: 'manageStock', component: ManageStockComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
