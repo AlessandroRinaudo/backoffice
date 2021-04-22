@@ -15,6 +15,7 @@ import { NavComponent } from './nav/nav.component';
 import { CookieService } from 'ngx-cookie-service';
 import { NotLoggedGuard } from './guards/not-logged.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AuthGuard } from './guards/auth.guard';
     ManageStockComponent,
     ReportingComponent,
     LoginComponent,
-    NavComponent
+    NavComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

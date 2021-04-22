@@ -7,6 +7,7 @@ import { ReportingComponent } from './reporting/reporting.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotLoggedGuard } from './guards/not-logged.guard';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'reporting', component: ReportingComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent, canActivate: [AuthGuard] },
   // { path: 'home', component: HomeComponent, canLoad: [AuthGuard] }
 ];
 
