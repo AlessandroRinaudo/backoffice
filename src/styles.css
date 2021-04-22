@@ -72,9 +72,10 @@ td {
 
 .form-signin {
   width: 100%;
-  max-width: 330px;
+  max-width: 600px;
   padding: 15px;
   margin: auto;
+  margin-top: 40px;
 }
 
 .form-signin .checkbox {
@@ -95,4 +96,11 @@ td {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.img-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 40%;
 }
